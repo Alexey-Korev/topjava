@@ -3,11 +3,11 @@ package topjava.util;
 import topjava.model.UserMeal;
 import topjava.model.UserMealWithExcess;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -21,19 +21,33 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
         );
 
-        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(15, 0), 2000);
         mealsTo.forEach(System.out::println);
 
 //        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with excess. Implement by cycles
+        final Map<LocalDate, Integer> caloriesSumByDate = new HashMap<>();
+        for (UserMeal meal : meals) {
+            LocalDate mealDate = meal.getDateTime().toLocalDate();
+            int calories = meal.getCalories();
+            if (caloriesSumByDate.containsKey(mealDate)) {
+                int currentCalories = caloriesSumByDate.get(mealDate);
+                caloriesSumByDate.put(mealDate, currentCalories + calories);
+            } else {
+                caloriesSumByDate.put(mealDate, calories);
+            }
+        }
+        final List<UserMealWithExcess> mealWithExcesses = new ArrayList<>();
+        for (UserMeal meal : meals) {
+
+        }
         return null;
     }
-
-    public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO Implement by streams
+    public static List<UserMealWithExcess> filteredByStreams (List < UserMeal > meals, LocalTime
+            startTime, LocalTime endTime,int caloriesPerDay){
         return null;
     }
 }
+
