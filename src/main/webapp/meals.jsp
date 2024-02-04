@@ -3,6 +3,7 @@
 <html lang="ru">
 <head>
   <title>Meals</title>
+  <link rel="stylesheet" type="text/css" href="<c:url value='/styles/styles.css'/>">
 </head>
 <body>
 <h3><a href="index.html">Home</a></h3>
@@ -13,19 +14,19 @@
 
 <c:if test="${!list.isEmpty()}">
   <div>
-    <table border="3" style="border: black">
+    <table>
       <th colspan="3" style="text-align: center;">Meals</th>
-      <tr id="title">
+      <tr>
         <th>Date, Time</th>
         <th>Description</th>
         <th>Calories</th>
       </tr>
       <c:forEach var="mealTo" items="${list}">
         <jsp:useBean id="mealTo" type="ru.javawebinar.topjava.model.MealTo"/>
-        <tr class="${mealTo.excess ? "excess" : "notexcess"}" style="color: ${mealTo.excess ? 'red' : 'green'};">
-          <td align="center">${dateTimeFormatter.format(mealTo.dateTime)}</td>
-          <td align="center">${mealTo.description}</td>
-          <td align="center">${mealTo.calories}</td>
+        <tr class="${mealTo.excess ? "excess" : "notexcess"}">
+          <td>${dateTimeFormatter.format(mealTo.dateTime)}</td>
+          <td>${mealTo.description}</td>
+          <td>${mealTo.calories}</td>
         </tr>
       </c:forEach>
     </table>

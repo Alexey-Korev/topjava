@@ -28,7 +28,7 @@ public class MealServlet extends HttpServlet {
         log.debug("redirect to meals");
 
         final int caloriesPerDay = 2000;
-        List<Meal> meals = MealsUtil.getMealList();
+        List<Meal> meals = MealsUtil.getList();
 
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
                 .collect(Collectors.groupingBy(meal -> meal.getDate(),
