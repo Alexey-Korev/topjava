@@ -20,6 +20,7 @@ public class MealTo {
         this.calories = calories;
         this.excess = excess;
     }
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -35,9 +36,7 @@ public class MealTo {
     public boolean isExcess() {
         return excess;
     }
-    public LocalDate getDate() {
-        return dateTime.toLocalDate();
-    }
+
     public LocalTime getTime() {
         return dateTime.toLocalTime();
     }
