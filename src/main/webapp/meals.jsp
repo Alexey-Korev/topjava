@@ -8,9 +8,7 @@
 <body>
 <h3><a href="index.html">Home</a></h3>
 <hr>
-<div id="commandpanel">
-    <a href="mealform.jsp" class="addButton">Add Meal</a>
-</div>
+<a href="meals?action=create">Add Meal</a>
 <div>
     <table>
         <th colspan="5" style="text-align: center;">Meals</th>
@@ -21,18 +19,14 @@
             <th></th>
             <th></th>
         </tr>
-        <c:forEach var="mealTo" items="${mealTos}">
-            <jsp:useBean id="mealTo" type="ru.javawebinar.topjava.model.MealTo"/>
-            <tr class="${mealTo.excess ? "excess" : "notexcess"}">
-                <td>${dateTimeFormatter.format(mealTo.dateTime)}</td>
-                <td>${mealTo.description}</td>
-                <td>${mealTo.calories}</td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/meals?action=edit&id=${mealTo.id}" class="rowButton">Edit</a>
-                </td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/meals?action=delete&id=${mealTo.id}" class="rowButton">Delete</a>
-                </td>
+        <c:forEach items="${meals}" var="meal">
+            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
+            <tr class="${meal.excess ? "excess" : "notexcess"}">
+                <td>${dateTimeFormatter.format(meal.dateTime)}</td>
+                <td>${meal.description}</td>
+                <td>${meal.calories}</td>
+                <td><a href="meals?action=update&id=${meal.id}" class="rowButton">Edit</a></td>
+                <td><a href="meals?action=delete&id=${meal.id}" class="rowButton">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
